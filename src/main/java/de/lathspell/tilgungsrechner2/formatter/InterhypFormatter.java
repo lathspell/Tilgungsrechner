@@ -2,11 +2,14 @@ package de.lathspell.tilgungsrechner2.formatter;
 
 import de.lathspell.tilgungsrechner2.Monat;
 import java.math.BigDecimal;
+import static java.math.BigDecimal.ZERO;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class InterhypFormatter extends Formatter {
 
     @Override
@@ -17,6 +20,7 @@ public class InterhypFormatter extends Formatter {
 
     @Override
     protected String formatMonat(Monat zeile) {
+        log.debug("Monat: " + zeile);
         String parts[] = zeile.getDatum().split("-");
         LocalDate date = LocalDate.of(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), 1);
         String monthString = date.format(DateTimeFormatter.ofPattern("LLL uuuu")).replaceAll("Mrz", "Mär");
@@ -49,6 +53,9 @@ public class InterhypFormatter extends Formatter {
     }
 
     private double getChangedRate(BigDecimal monatsRate, BigDecimal initialeSchuld, BigDecimal sollZins) {
+        if (initialeSchuld == null || initialeSchuld.equals(ZERO)) {
+            throw new IllegalArgumentException("Initiale Schuld darf nicht 0 sein!");
+        }
         double rate = (monatsRate.doubleValue() - (initialeSchuld.doubleValue() * sollZins.doubleValue() / 100 / 12)) * 12 / initialeSchuld.doubleValue();
         return rate * 100;
     }

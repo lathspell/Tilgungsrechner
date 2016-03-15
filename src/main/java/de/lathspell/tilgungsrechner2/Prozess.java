@@ -2,22 +2,23 @@ package de.lathspell.tilgungsrechner2;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static java.math.BigDecimal.ZERO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class Prozess extends Monat {
-
-    private static final Logger log = LoggerFactory.getLogger(Prozess.class);
 
     Prozess() {
         super();
-        schuld = BigDecimal.ZERO;
+        schuld = ZERO;
     }
 
     void prepareNextMonth(String datum, ConfigEntry currentConfig) {
+        log.debug("prepareNextMonth: " + datum);
         this.datum = datum;
-        auszahlung = BigDecimal.ZERO;
-        sondertilgung = BigDecimal.ZERO;
+        auszahlung = ZERO;
+        sondertilgung = ZERO;
         neueMonatsRate = false;
         zinsbindungsEnde = false;
         if (currentConfig == null) {
@@ -27,8 +28,9 @@ public class Prozess extends Monat {
             auszahlung = currentConfig.getAuszahlung();
             schuld = schuld.add(currentConfig.getAuszahlung());
         }
-        if (initialeSchuld == null && monatsRate != null && monatsRate.equals(new BigDecimal(-1)) && currentConfig.getMonatsrate() != null) {
-            initialeSchuld = BigDecimal.ZERO.add(schuld);
+        if (initialeSchuld == null && (monatsRate == null || monatsRate.equals(new BigDecimal(-1))) && currentConfig.getMonatsrate() != null) {
+            log.debug("Initiale Schuld := " + schuld);
+            initialeSchuld = ZERO.add(schuld);
         }
         if (currentConfig.getMonatsrate() != null) {
             if (monatsRate != null) {
@@ -62,7 +64,7 @@ public class Prozess extends Monat {
         }
 
         // Monatsrate um Monatszins verringern und Tilgung berechnen
-        monatsTilgung = monatsRate.equals(new BigDecimal(-1)) ? BigDecimal.ZERO : monatsRate.subtract(monatsZins);
+        monatsTilgung = monatsRate.equals(new BigDecimal(-1)) ? ZERO : monatsRate.subtract(monatsZins);
         schuld = schuld.subtract(monatsTilgung);
     }
 
