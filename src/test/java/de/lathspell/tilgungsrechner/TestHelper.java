@@ -42,8 +42,12 @@ public class TestHelper {
     }
 
     public void writeOutput(String ist) throws IOException {
+        writeOutput(ist, false);
+    }
+
+    public void writeOutput(String ist, boolean withConfig) throws IOException {
         assertNotNull(ist);
-        FileUtils.write(new File(dir, basename + ".out"), "# " + basename + "\n" + ist);
+        FileUtils.write(new File(dir, basename + ".out"), (withConfig ? ("=== " + basename + " ===\n\n" + loadFile(".yml") + "\n\n") : ("# " + basename + "\n")) + ist);
         // System.out.println("# " + basename + ":\n" + ist);
     }
 }
