@@ -1,12 +1,15 @@
 package de.lathspell.tilgungsrechner;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import de.lathspell.tilgungsrechner2.Config;
 import java.io.File;
 import java.io.IOException;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.apache.commons.io.FileUtils;
+
 import static org.junit.Assert.assertNotNull;
+
+import de.lathspell.tilgungsrechner2.Config;
 
 public class TestHelper {
 
@@ -29,7 +32,7 @@ public class TestHelper {
     public String loadOk() throws IOException {
         return loadFile(".ok");
     }
-    
+
     public String loadFile(String ext) throws IOException {
         File f = new File(dir, basename + ext);
         // System.out.println(f);
@@ -40,7 +43,7 @@ public class TestHelper {
 
     public void writeOutput(String ist) throws IOException {
         assertNotNull(ist);
-        FileUtils.write(new File(dir, basename + ".out"), ist);
+        FileUtils.write(new File(dir, basename + ".out"), "# " + basename + "\n" + ist);
         // System.out.println("# " + basename + ":\n" + ist);
     }
 }
