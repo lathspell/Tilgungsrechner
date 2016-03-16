@@ -17,6 +17,7 @@ public class Monat {
     protected BigDecimal monatsZins;
     protected BigDecimal monatsTilgung;
     protected BigDecimal sondertilgung;
+    protected BigDecimal tilgungszuschuss;
     protected boolean neueMonatsRate;
     protected boolean zinsbindungsEnde;
 

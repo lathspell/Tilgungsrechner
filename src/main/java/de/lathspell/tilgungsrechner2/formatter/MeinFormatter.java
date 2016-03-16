@@ -1,9 +1,15 @@
 package de.lathspell.tilgungsrechner2.formatter;
 
-import de.lathspell.tilgungsrechner2.Monat;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static java.math.BigDecimal.ZERO;
+
+import lombok.extern.slf4j.Slf4j;
+
+import de.lathspell.tilgungsrechner2.Monat;
+
+@Slf4j
 public class MeinFormatter extends InterhypFormatter {
 
     @Override
@@ -17,12 +23,15 @@ public class MeinFormatter extends InterhypFormatter {
 
     @Override
     protected String formatFooter(List<Monat> zeilen) {
-        BigDecimal raten = BigDecimal.ZERO;
-        BigDecimal zinsen = BigDecimal.ZERO;
-        BigDecimal darlehen = BigDecimal.ZERO;
+        BigDecimal raten = ZERO;
+        BigDecimal zinsen = ZERO;
+        BigDecimal darlehen = ZERO;
 
         for (Monat zeile : zeilen) {
-            raten = raten.add(zeile.getMonatsRate()).add(zeile.getSondertilgung());
+            if (zeile.getMonatsRate().compareTo(new BigDecimal(-1)) != 0) {
+                raten = raten.add(zeile.getMonatsRate());
+            }
+            raten = raten.add(zeile.getSondertilgung());
             zinsen = zinsen.add(zeile.getMonatsZins());
             darlehen = darlehen.add(zeile.getAuszahlung());
         }

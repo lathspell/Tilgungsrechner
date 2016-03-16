@@ -19,6 +19,7 @@ public class Prozess extends Monat {
         this.datum = datum;
         auszahlung = ZERO;
         sondertilgung = ZERO;
+        tilgungszuschuss = ZERO;
         neueMonatsRate = false;
         zinsbindungsEnde = false;
         if (currentConfig == null) {
@@ -44,14 +45,22 @@ public class Prozess extends Monat {
         if (currentConfig.getSondertilgung() != null) {
             sondertilgung = currentConfig.getSondertilgung();
         }
+        if (currentConfig.getTilgungszuschuss() != null) {
+            tilgungszuschuss = currentConfig.getTilgungszuschuss();
+        }
         if (currentConfig.getZinsbindung() != null) {
             zinsbindungsEnde = true;
         }
     }
 
     void calcMonth() {
+        if (sollZins == null) {
+            throw new IllegalStateException("Sollzins wurde noch nicht initialisiert!");
+        }
+        
         // Vor Zinsberechnung da: "Sondertilgung 10.000,00 EUR nach Periode Dez 2019"
         schuld = schuld.subtract(sondertilgung);
+        schuld = schuld.subtract(tilgungszuschuss);
 
         // Zinsen für aktuellen Monat berechnen
         monatsZins = schuld.multiply(sollZins).divide(new BigDecimal(12 * 100), 2, RoundingMode.HALF_UP); // 12 Monate und 100 wegen %
