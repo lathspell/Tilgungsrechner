@@ -1,12 +1,11 @@
-## Tilgungsrechner2 Konfiguration
----
 months:
     "2016-04":
-        auszahlung: 120000
+        darlehensbetrag: 100000
+        auszahlung: 100000
         sollzins: 2.09
-        monatsrate: 800
-    "2020-01":
-        sondertilgung: 10000
+        monatsrate: 700
+    "2021-03":
+        sondertilgung: 12000
     "2024-01":
-        monatsrate: 1009
+        monatsrate: 425
     

@@ -3,13 +3,19 @@ Sondertilgungen, Auszahlungen und Monatsratenanpassungen.
 
 ACHTUNG: Reines Lernprojekt, enthält bestimmt noch Fehler!
 
+Beschränkungen
+--------------
+
+Alle Ereignisse in der Konfiguration finden am Monatsersten statt.
+
 YAML Konfiguration
 ------------------
 
+* Darlehensbetrag ist der Gesamtbetrag laut Vertrag (für die Berechnung des Tilgungsatz in %)
 * Monatsrate -1 bedeutet "nur Zinsen, keine Tilgung"
 * Tilgungszuschuss: Schuldenerlass der Bank
 * Sondertilgung: Einmalige Zahlung
-* Auszahlung: Auszahlung die die Schulden erhöht
+* Auszahlung: Auszahlung die die Schulden erhöht; alle Auszahlungen dürfen den Darlehensbetrag nicht überschreiten!
 * Sollzins: Der ab nun gültige Zinssatz
 
 Beispiel:
@@ -29,3 +35,7 @@ Beispiel:
             sondertilgung: 10000
         "2018-01":
             # letzer Monat, danach Warnung!
+
+TODO
+----
+* Ist der Hack mit Monatsrate=-1 noch notwendig?

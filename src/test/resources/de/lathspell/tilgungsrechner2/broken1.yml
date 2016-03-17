@@ -1,0 +1,11 @@
+# Abbruch wegen zu vielen Auszahlungen
+months:
+    "2016-04":
+        darlehensbetrag: 60000
+        sollzins: 1.23
+        monatsrate: 161.50
+        auszahlung: 10000
+    "2016-05":
+        auszahlung: 40000
+    "2016-07":
+        auszahlung: 20000

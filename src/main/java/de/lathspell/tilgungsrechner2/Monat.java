@@ -10,7 +10,7 @@ public class Monat {
 
     protected String datum;
     protected BigDecimal auszahlung;
-    protected BigDecimal initialeSchuld;
+    protected BigDecimal darlehensbetrag;
     protected BigDecimal schuld;
     protected BigDecimal sollZins;
     protected BigDecimal monatsRate;

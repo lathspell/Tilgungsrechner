@@ -1,0 +1,40 @@
+#Darlehensbetrag 
+#3.243,00€
+#Auszahlungsdatum 
+#22.07.2014
+#Häufigkeit der Ratenzahlung 
+#monatlich
+#Dauer der Sollzinsbindung 
+#13 Jahre
+#Gebundener Sollzinssatz 
+#0,48% pro Jahr
+#Anfängliche Tilgung 
+#6,12%
+#Höhe der Rate 
+#17,84€
+#Getilgter Betrag zum Ende der Sollzinsbindung 
+#3.243,00€
+#Restschuld zum Ende der Sollzinsbindung 
+#0,00€
+#Summe der geleisteten Zinszahlungen 
+#68,26€ 
+months:
+    "2014-07":
+        darlehensbetrag: 3243
+        sollzins: 0.48
+        auszahlung: 3243
+        monatsrate: 17.84
+    "2015-06":
+        monatsrate: 9.40
+    "2016-08":
+        monatsrate: 44.54
+    "2016-10":
+        sondertilgung: 20
+    "2017-10":
+        sondertilgung: 20
+    "2018-10":
+        sondertilgung: 20
+    "2017-01":
+        sondertilgung: 45
+    "2027-07":
+        zinsbindung: true

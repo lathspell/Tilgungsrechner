@@ -18,6 +18,9 @@ public class MeinFormatter extends InterhypFormatter {
         if (zeile.isZinsbindungsEnde()) {
             output += ">> !!! ZINSBINDUNGSENDE !!!\n";
         }
+        if (zeile.getTilgungszuschuss().compareTo(ZERO) != 0) {
+            output += ">> Tilgungszuschuss: " + String.format("%,.2f", zeile.getTilgungszuschuss().doubleValue()) + "\n";
+        }
         return output;
     }
 
@@ -36,7 +39,7 @@ public class MeinFormatter extends InterhypFormatter {
             darlehen = darlehen.add(zeile.getAuszahlung());
         }
 
-        return String.format("GESAMT: Monatsraten: %,.2f   davon Zinsen: %,.2f  für ein Darlehen über %,.2f\n",
-                raten.doubleValue(), zinsen.doubleValue(), darlehen);
+        return String.format("GESAMT: %d Monatsraten: %,.2f   davon Zinsen: %,.2f  für ein Darlehen über %,.2f\n",
+                zeilen.size(), raten.doubleValue(), zinsen.doubleValue(), darlehen);
     }
 }

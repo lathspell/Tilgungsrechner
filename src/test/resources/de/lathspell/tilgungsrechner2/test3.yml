@@ -1,0 +1,29 @@
+# Darlehensbetrag               60.000,00€
+# Auszahlungsdatum              01.04.2016
+# Häufigkeit der Ratenzahlung   monatlich
+# Dauer der Sollzinsbindung     20 Jahre
+# Gebundener Sollzinssatz       1,23% pro Jahr
+# Anfängliche Tilgung           2,00%
+# Höhe der Rate                 161,50€
+# Getilgter Betrag zum Ende der Sollzinsbindung     51.160,58€
+# Restschuld zum Ende der Sollzinsbindung           8.839,42€
+# Summe der geleisteten Zinszahlungen               8.774,42€
+# Rate bei Sollzinsanstieg von 2% am Ende der Sollzinsbindung       276,23€
+# Darlehensdauer bei gleich bleibendem Zins                         Feb. 2039
+# Gesamtlaufzeit des Darlehens                      22 Jahre 11 Monate
+---
+months:
+    "2016-04":
+        darlehensbetrag: 60000
+        sollzins: 1.23
+        monatsrate: 161.50
+        auszahlung: 60000
+    "2020-01":
+        sondertilgung: 10000
+    "2020-03":
+        monatsrate: 136.50
+    "2025-08":
+        monatsrate: 261.50
+    "2036-04":
+        zinsbindung: true
+    

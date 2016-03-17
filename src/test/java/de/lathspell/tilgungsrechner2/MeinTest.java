@@ -10,15 +10,16 @@ import org.junit.runners.Parameterized;
 import static org.junit.Assert.assertEquals;
 
 import de.lathspell.tilgungsrechner.TestHelper;
-import de.lathspell.tilgungsrechner2.formatter.InterhypFormatter;
+import de.lathspell.tilgungsrechner2.formatter.MeinFormatter;
+import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class InterhypTest {
+public class MeinTest {
 
-    @Parameterized.Parameters
+    @Parameters(name = "{0}")
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
-            {"test1"}, {"test2"}, {"test3"}, {"test4"}, {"test5"}
+            {"mein1"}, {"mein2"}, {"mein3"}, {"mein4"}
         });
     }
 
@@ -27,13 +28,13 @@ public class InterhypTest {
 
     @Test
     public void test1() throws Exception {
-        TestHelper helper = new TestHelper(InterhypTest.class, name);
+        TestHelper helper = new TestHelper(MeinTest.class, name);
         Config config = helper.loadConfig();
 
         Tilgungsrechner tr = new Tilgungsrechner();
         tr.loop(config);
 
-        String ist = tr.format(new InterhypFormatter());
+        String ist = tr.format(new MeinFormatter());
         helper.writeOutput(ist);
         String soll = helper.loadOk();
 

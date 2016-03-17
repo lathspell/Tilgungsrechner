@@ -28,10 +28,18 @@ public class Prozess extends Monat {
         if (currentConfig.getAuszahlung() != null) {
             auszahlung = currentConfig.getAuszahlung();
             schuld = schuld.add(currentConfig.getAuszahlung());
+            if (darlehensbetrag != null && schuld.compareTo(darlehensbetrag.multiply(new BigDecimal(1.01))) == 1) {
+                throw new IllegalArgumentException("Schuld " + schuld + " übersteigt Darlehensbetrag " + darlehensbetrag + "!");
+            }
         }
-        if (initialeSchuld == null && (monatsRate == null || monatsRate.equals(new BigDecimal(-1))) && currentConfig.getMonatsrate() != null) {
-            log.debug("Initiale Schuld := " + schuld);
-            initialeSchuld = ZERO.add(schuld);
+        if (currentConfig.getDarlehensbetrag() != null){
+            if (darlehensbetrag != null) {
+                throw new IllegalArgumentException("Darlehensbetrag bereits gesetzt!");
+            }
+            darlehensbetrag = currentConfig.getDarlehensbetrag();
+        }
+        if (darlehensbetrag == null) {
+            throw new IllegalArgumentException("Darlehensbetrag muss im ersten Monat gesetzt werden!");
         }
         if (currentConfig.getMonatsrate() != null) {
             if (monatsRate != null) {

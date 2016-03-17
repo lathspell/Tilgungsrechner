@@ -1,13 +1,16 @@
 package de.lathspell.tilgungsrechner2.formatter;
 
-import de.lathspell.tilgungsrechner2.Monat;
 import java.math.BigDecimal;
-import static java.math.BigDecimal.ZERO;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
+
+import static java.math.BigDecimal.ZERO;
+
 import lombok.extern.slf4j.Slf4j;
+
+import de.lathspell.tilgungsrechner2.Monat;
 
 @Slf4j
 public class InterhypFormatter extends Formatter {
@@ -33,7 +36,7 @@ public class InterhypFormatter extends Formatter {
         }
         if (zeile.isNeueMonatsRate()) {
             meldung += String.format(">> Neuer Tilgungssatz %,.2f %% ab %s (neue Rate %,.2f)\n",
-                    getChangedRate(zeile.getMonatsRate(), zeile.getInitialeSchuld(), zeile.getSollZins()),
+                    getChangedRate(zeile.getMonatsRate(), zeile.getDarlehensbetrag(), zeile.getSollZins()),
                     monthString,
                     zeile.getMonatsRate()
             );
@@ -52,11 +55,11 @@ public class InterhypFormatter extends Formatter {
         return "";
     }
 
-    private double getChangedRate(BigDecimal monatsRate, BigDecimal initialeSchuld, BigDecimal sollZins) {
-        if (initialeSchuld == null || initialeSchuld.equals(ZERO)) {
-            throw new IllegalArgumentException("Initiale Schuld darf nicht 0 sein!");
+    private double getChangedRate(BigDecimal monatsRate, BigDecimal darlehensbetrag, BigDecimal sollZins) {
+        if (darlehensbetrag == null || darlehensbetrag.equals(ZERO)) {
+            throw new IllegalArgumentException("Darlehensbetrag darf nicht 0 sein!");
         }
-        double rate = (monatsRate.doubleValue() - (initialeSchuld.doubleValue() * sollZins.doubleValue() / 100 / 12)) * 12 / initialeSchuld.doubleValue();
+        double rate = (monatsRate.doubleValue() - (darlehensbetrag.doubleValue() * sollZins.doubleValue() / 100 / 12)) * 12 / darlehensbetrag.doubleValue();
         return rate * 100;
     }
 

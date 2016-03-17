@@ -1,0 +1,17 @@
+# Mit KfW Rechner verifiziert
+# Die Cents stimmen nicht immer, vermutlich rundet der Webrechner anders
+months:
+    "2016-05":
+        darlehensbetrag: 5000
+        sollzins: 0.75
+        monatsrate: -1
+        auszahlung: 5000
+    "2018-05":
+        # 10% vom Darlehensbetrag
+        tilgungszuschuss: 500
+        monatsrate: 53.68
+    "2026-05":
+        zinsbindung: true
+
+
+    

@@ -9,6 +9,8 @@ import lombok.ToString;
 @ToString
 public class ConfigEntry {
 
+    /** Vertraglich vereinbarter Betrag zur Erreichnung der Tilungssätze in %. */
+    private BigDecimal darlehensbetrag;
     private BigDecimal auszahlung;
     /** Von uns geleistete Zahlung. */
     private BigDecimal sondertilgung;

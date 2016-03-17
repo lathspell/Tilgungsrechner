@@ -1,9 +1,8 @@
-## Tilgungsrechner2 Konfiguration
----
 months:
     "2016-04":
-        auszahlung: 120000
+        darlehensbetrag: 100000
+        auszahlung: 100000
         sollzins: 2.09
-        monatsrate: 800
+        monatsrate: 700
         
     
