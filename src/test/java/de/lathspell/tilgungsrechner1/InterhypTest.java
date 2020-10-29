@@ -21,8 +21,8 @@ public class InterhypTest {
         helper.writeOutput(ist);
         String soll = helper.loadOk();
 
-        String actualCleaned = ist.replaceAll("[\\t ]+", " ");
-        String expectedCleaned = soll.replaceAll("[\\t ]+", " ");
+        String actualCleaned = ist.replaceAll("[\\t ]+", " ").replaceAll("\r", "");
+        String expectedCleaned = soll.replaceAll("[\\t ]+", " ").replaceAll("\r", "");
         assertEquals(expectedCleaned, actualCleaned);
     }
 }
